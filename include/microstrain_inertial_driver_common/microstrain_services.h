@@ -55,6 +55,7 @@ public:
   bool getGyroBias(GetGyroBiasServiceMsg::Request& req, GetGyroBiasServiceMsg::Response& res);
 
   bool gyroBiasCapture(TriggerServiceMsg::Request& req, TriggerServiceMsg::Response& res);
+  bool gyroBiasCaptureAndSave(TriggerServiceMsg::Request& req, TriggerServiceMsg::Response& res);
 
   bool setHardIronValues(SetHardIronValuesServiceMsg::Request& req, SetHardIronValuesServiceMsg::Response& res);
   bool getHardIronValues(GetHardIronValuesServiceMsg::Request& req, GetHardIronValuesServiceMsg::Response& res);
@@ -182,6 +183,7 @@ private:
   SetGyroBiasServiceType set_gyro_bias_service_;
   GetGyroBiasServiceType get_gyro_bias_service_;
   TriggerServiceType gyro_bias_capture_service_;
+  TriggerServiceType gyro_bias_capture_and_save_service_;
   SetHardIronValuesServiceType set_hard_iron_values_service_;
   GetHardIronValuesServiceType get_hard_iron_values_service_;
   SetSoftIronMatrixServiceType set_soft_iron_matrix_service_;

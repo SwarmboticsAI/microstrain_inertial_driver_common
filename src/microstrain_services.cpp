@@ -107,6 +107,8 @@ bool MicrostrainServices::configure()
   {
     gyro_bias_capture_service_ =
         create_service<TriggerServiceMsg>(node_, "gyro_bias_capture", &MicrostrainServices::gyroBiasCapture, this);
+    gyro_bias_capture_and_save_service_ =
+        create_service<TriggerServiceMsg>(node_, "gyro_bias_capture_and_save", &MicrostrainServices::gyroBiasCaptureAndSave, this);
   }
 
   // IMU Mag Hard iron offset service
@@ -618,6 +620,30 @@ bool MicrostrainServices::gyroBiasCapture(TriggerServiceMsg::Request& req, Trigg
     }
   }
 
+  return res.success;
+}
+
+bool MicrostrainServices::gyroBiasCaptureAndSave(TriggerServiceMsg::Request& req, TriggerServiceMsg::Response& res)
+{
+  res.success = false;
+
+  // Call the gyro bias capture service
+  gyroBiasCapture(req, res);
+
+  // If successful, save to the device
+  if (res.success)
+  {
+    try
+    {
+      MICROSTRAIN_INFO(node_, "Saving gyro bias after capture");
+      config_->inertial_device_->saveSettingsAsStartup(mscl::MipTypes::MipCommands{mscl::MipTypes::Command::CMD_GYRO_BIAS});
+      res.success = true;
+    }
+    catch (mscl::Error& e)
+    {
+      MICROSTRAIN_ERROR(node_, "Error saving gyro bias after capture");
+    }
+  }
   return res.success;
 }
 
