@@ -1809,7 +1809,7 @@ void Publishers::handleAfterPacket(const mip::PacketRef& packet, mip::Timestamp 
     event_source_mapping_[packet.descriptorSet()].trigger_id = 0;
 
   // Reset some state in messages that need to have it reset
-  filter_llh_position_pub_->getMessage()->status.status = NavSatFixMsg::_status_type::STATUS_NO_FIX;
+  // filter_llh_position_pub_->getMessage()->status.status = NavSatFixMsg::_status_type::STATUS_NO_FIX;
 
   // Reset whether or not we have RTK
   rtk_fixed_ = false;
