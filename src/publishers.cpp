@@ -524,7 +524,7 @@ void Publishers::publish()
     }
     else
     {
-      MICROSTRAIN_WARN_THROTTLE(node_, 500, "Unable to lookup transform from %s to %s: %s", config_->target_frame_id_.c_str(), config_->frame_id_.c_str(), tf_error_string.c_str());
+      MICROSTRAIN_WARN_THROTTLE(node_, 1000, "Unable to lookup transform from %s to %s: %s", config_->target_frame_id_.c_str(), config_->frame_id_.c_str(), tf_error_string.c_str());
     }
   }
 
@@ -551,7 +551,7 @@ void Publishers::publish()
     }
     else
     {
-      MICROSTRAIN_WARN_THROTTLE(node_, 500, "Unable to lookup transform from %s to %s: %s", config_->target_frame_id_.c_str(), config_->frame_id_.c_str(), tf_error_string.c_str());
+      MICROSTRAIN_WARN_THROTTLE(node_, 1000, "Unable to lookup transform from %s to %s: %s", config_->target_frame_id_.c_str(), config_->frame_id_.c_str(), tf_error_string.c_str());
     }
   }
 
